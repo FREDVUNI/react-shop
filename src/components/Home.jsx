@@ -3,6 +3,8 @@ import BannerSection from './BannerSection'
 import ProductCard from './ProductCard'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import axios from 'axios'
+import {url} from '../api'
 
 const Home = () => {
     const [products,setProducts] = useState([])
@@ -13,12 +15,13 @@ const Home = () => {
         let loadProducts = true;
 
         const getProducts = async() =>{
-            const res = await fetch('https://fakestoreapi.com/products',{mode: 'cors'})
+            const res = await axios
+            .get(`${url}/products`)
             setLoading(true)
 
             if(loadProducts){
-                setProducts(await res.clone().json());
-                setFilter(await res.json());
+                setProducts(await res.data);
+                setFilter(await res.data);
                 setLoading(false)
             }
             return ()=>{
@@ -29,7 +32,7 @@ const Home = () => {
     },[])
     
     const filterProducts = (category) =>{
-        const data = products.filter(product => product.category === category)
+        const data = products.filter(product => product.category.category === category)
         setFilter(data)
     }
 
@@ -61,10 +64,10 @@ const Home = () => {
                     <div className="content">
                         <div className="row">
                             <span id="all" onClick={()=>setFilter(products)}>All</span>
-                            <span id="all" onClick={()=>filterProducts('jewelery')}>Jewellery</span>
-                            <span id="all" onClick={()=>filterProducts('men\'s clothing')}>Men's clothes</span>
-                            <span id="all" onClick={()=>filterProducts('women\'s clothing')}>Women's clothes</span>
-                            <span id="all" onClick={()=>filterProducts('electronics')}>Electronics</span>
+                            <span id="all" onClick={()=>filterProducts('Jewellery')}>Jewellery</span>
+                            <span id="all" onClick={()=>filterProducts('Men\'s clothing')}>Men's clothes</span>
+                            <span id="all" onClick={()=>filterProducts('Women\'s clothing')}>Women's clothes</span>
+                            <span id="all" onClick={()=>filterProducts('Electronics')}>Electronics</span>
                         </div>
                     </div>
                 </div>

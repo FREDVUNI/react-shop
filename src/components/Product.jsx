@@ -4,6 +4,8 @@ import ProductCard from './ProductCard'
 import { useParams } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import axios from 'axios'
+import {url} from '../api'
 
 const Product = () => {
     const {id} = useParams()
@@ -11,23 +13,24 @@ const Product = () => {
     const [product,setProduct] = useState([])
     const [related,setRelated] = useState([])
     const [loading,setLoading] = useState(false)
-    let url = 'https://fakestoreapi.com/products'
     
-    const products = related && product && related.filter(p => p.category === product.category)
+    const products = related && product && related.filter(p => p.category.category === product.category)
     const single = localStorage.setItem("singleProduct",JSON.stringify(product))
 
     useEffect(()=>{
         const getProduct = async() =>{
             setLoading(true)
-            const response = await fetch(url+`/${id}`)
-            setProduct(await response.json())
+            const response = await axios
+            .get(`${url}/products/${id}`)
+            setProduct(await response.data)
             setLoading(false)
         }
 
         const relatedProducts = async() =>{
             setLoading(true)
-            const response = await fetch(url)
-            setRelated(await response.json())
+            const response = await axios
+            .get(`${url}/products`)
+            setRelated(await response.data)
             setLoading(false)
         }
         if(single){
@@ -87,7 +90,7 @@ const Product = () => {
                     <img src={product.image} alt={product.title}/>
                 </div>
                 <div className="col-single">
-                    <h2>{product.title}</h2>
+                    <h2>{product.product}</h2>
                     <h4>$ {product.price}</h4>
                     <h3 id="details">Description</h3>
                     <p>{product.description}</p>
