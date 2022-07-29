@@ -1,16 +1,18 @@
-import React,{useState,useContext} from 'react'
+// import React,{useState,useContext} from 'react'
+import React,{useState} from 'react'
 import "../App.css"
-import {Link,useNavigate} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+// import {Link,useNavigate} from 'react-router-dom'
 import FormInput from './FormInput'
-import UserContext from '../context/UserContext'
+// import UserContext from '../context/UserContext'
 
 const SignUp = () =>{
-    const { isLoggedIn }  = useContext(UserContext)
-    let navigate = useNavigate()
+    // const { isLoggedIn }  = useContext(UserContext)
+    // let navigate = useNavigate()
 
-    if(isLoggedIn){
-        navigate("/sign-in", { replace: true });
-    }
+    // if(isLoggedIn){
+    //     navigate("/sign-in", { replace: true });
+    // }
 
     const [error,setError] = useState("");
     const [values,setValues] = useState({
@@ -80,7 +82,7 @@ const SignUp = () =>{
             }else{
                 localStorage.setItem('users', JSON.stringify([{username:values.username,email:values.email,password:values.password}]));
             }
-           navigate("/sign-in", { replace: true });
+        //    navigate("/sign-in", { replace: true });
         }
     }
 

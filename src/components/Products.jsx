@@ -8,7 +8,7 @@ import ProductCard from './ProductCard'
 const Products = () =>{
     const [products,setProducts] = useState([])
     const [loading,setLoading] = useState(false)
-    const [count,setCount] = useState(0)
+    // const [count,setCount] = useState(0)
 
     let storeProducts = localStorage.setItem("all-products",JSON.stringify(products))
 
@@ -33,7 +33,7 @@ const Products = () =>{
         }else{
             getProducts()
         }
-    },[storeProducts,count])
+    },[storeProducts])
     
     const Loading = () =>{
         return(
@@ -54,8 +54,7 @@ const Products = () =>{
         )
     }
 
-    if(products){
-        return (
+    return (
             <div className="container">
                 <div className="content">
                     <h2 className="title-left">All Products</h2>
@@ -69,22 +68,6 @@ const Products = () =>{
                 </div>
             </div>
         )
-    }else{
-        return(
-            <div className="container">
-               <div className="content">
-                   <div className="row row2">
-                    <div className="product-col4">
-                            <Loading/>
-                        </div>
-                        <div className="col-single">
-                            <h2 id="details">Products are loading ...</h2>
-                        </div>
-                    </div> 
-               </div>
-           </div>
-        )
-    }
 }
 
 export default Products

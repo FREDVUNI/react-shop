@@ -8,18 +8,17 @@ import axios from 'axios'
 import {url} from '../api'
 
 const Product = () => {
-    const {id} = useParams()
+    let {id} = useParams() 
     
     const [product,setProduct] = useState([])
     const [related,setRelated] = useState([])
     const [loading,setLoading] = useState(false)
     
-    const products = related && product && related.filter(p => p.category.category === product.category)
+    
     const single = localStorage.setItem("singleProduct",JSON.stringify(product))
 
     useEffect(()=>{
         const getProduct = async() =>{
-            setLoading(true)
             const response = await axios
             .get(`${url}/products/${id}`)
             setProduct(await response.data)
@@ -39,11 +38,9 @@ const Product = () => {
             getProduct();
         }
 
-        relatedProducts();
-        // eslint-disable-next-line
-    },[])
-
-
+        relatedProducts(window.scrollTo(0, 0));
+    },[id,single])
+    const products = related && product && related.filter(p => p.category.id === product.categoryId)
     const Loading = () =>{
         return(
         <>
@@ -79,7 +76,7 @@ const Product = () => {
         </>
         )
     }
-    if(product && product.id){
+    if(product && product.id === Number(id)){
     return (
         <div className="container">
             <div className="content">
@@ -87,11 +84,11 @@ const Product = () => {
                 {loading ? <Loading/>:
                 <>
                 <div className="product-col4">
-                    <img src={product.image} alt={product.title}/>
+                    <img src={product.image} alt={product.product}/>
                 </div>
                 <div className="col-single">
                     <h2>{product.product}</h2>
-                    <h4>$ {product.price}</h4>
+                    <h4>{product.price}</h4>
                     <h3 id="details">Description</h3>
                     <p>{product.description}</p>
                     {/* <input type="number" value="4" min="1" id="cart-input"/> */}

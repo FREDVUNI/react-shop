@@ -15,9 +15,9 @@ const Home = () => {
         let loadProducts = true;
 
         const getProducts = async() =>{
+            setLoading(true)
             const res = await axios
             .get(`${url}/products`)
-            setLoading(true)
 
             if(loadProducts){
                 setProducts(await res.data);

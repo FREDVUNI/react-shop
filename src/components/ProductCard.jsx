@@ -13,8 +13,11 @@ const ProductCard = ({product}) =>{
                     }
                 </h2>
             </Link>
-            <p>${product.price}</p>
+            <p style={{"color":"#000"}}>
+                <strong>{product.price}</strong>
+            </p>
                 {/* <Ratings value={product.rating.rate} text={`${product.rating.count} reviews`}/> */}
+                <span style={{"color":"red"}}>{product.category.category}</span>
         </div>
     )
 }

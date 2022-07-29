@@ -646,7 +646,6 @@ select:focus{
     border: 1px solid #ff523b;
 }
 .error-span{
-    float:left;
     color:red;
     display:none;
     font-size:13px;
@@ -792,6 +791,8 @@ th:last-child{
     padding:20px;
     margin:auto;
     box-shadow: 0 0 5px 0px rgba(0,0,0,0.1);
+}
+.form-box h2{
     text-align:center;
 }
 .form-box form{

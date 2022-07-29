@@ -1,20 +1,22 @@
-import React,{useState,useContext,useEffect} from 'react'
-import {Link,useNavigate} from 'react-router-dom'
+import React,{useState} from 'react'
+// import React,{useState,useContext,useEffect} from 'react'
+import {Link} from 'react-router-dom'
+// import {Link,useNavigate} from 'react-router-dom'
 import FormInput from './FormInput'
 import "../App.css"
-import UserContext from '../context/UserContext'
+// import UserContext from '../context/UserContext'
 
 const SignIn = () =>{
-    const { isLoggedIn }  = useContext(UserContext)
+    // const { isLoggedIn }  = useContext(UserContext)
     const [error,setError] = useState("");
 
-    let navigate = useNavigate()
+    // let navigate = useNavigate()
 
-    useEffect(()=>{
-        if(isLoggedIn){
-            navigate("/", { replace: true });
-        }
-    })
+    // useEffect(()=>{
+    //     if(isLoggedIn){
+    //         navigate("/", { replace: true });
+    //     }
+    // })
 
     const [values,setValues] = useState({
         email:"",
