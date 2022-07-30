@@ -6,6 +6,7 @@ import UserContext from '../context/UserContext'
 import axios from 'axios'
 import {toast} from 'react-toastify'
 import {url} from '../api'
+// import jwtDecode from 'jwt-decode'
 
 const SignUp = () =>{
     const { isLoggedIn }  = useContext(UserContext)
