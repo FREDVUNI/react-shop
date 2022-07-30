@@ -13,6 +13,8 @@ import PageNotFound from './components/PageNotFound'
 import Contact from './components/Contact'
 import {CartProvider} from './context/CartContext'
 import {UserProvider} from './context/UserContext'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
       <CartProvider>
       <UserProvider>
       <Router>
+        <ToastContainer/>
           <NavBar/>
           <Routes>
               <Route path="/" element={<Home/>}/>  

@@ -1,24 +1,26 @@
-// import React,{useState,useContext} from 'react'
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import "../App.css"
-import {Link} from 'react-router-dom'
-// import {Link,useNavigate} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import FormInput from './FormInput'
-// import UserContext from '../context/UserContext'
+import UserContext from '../context/UserContext'
+import axios from 'axios'
+import {toast} from 'react-toastify'
+import {url} from '../api'
 
 const SignUp = () =>{
-    // const { isLoggedIn }  = useContext(UserContext)
-    // let navigate = useNavigate()
+    const { isLoggedIn }  = useContext(UserContext)
+    let navigate = useNavigate()
 
-    // if(isLoggedIn){
-    //     navigate("/sign-in", { replace: true });
-    // }
+    if(isLoggedIn){
+        navigate("/sign-in", { replace: true });
+    }
 
     const [error,setError] = useState("");
     const [values,setValues] = useState({
         email:"",
         username:"",
         password:"",
+        token:""
     })
 
     const inputs =[
@@ -76,13 +78,37 @@ const SignUp = () =>{
             localStorage.setItem("sign-up-errors",JSON.stringify(s_error))
             setError("username or email address already exists.")
         }else{
-            if(users){
-                users.push({username:values.username,email:values.email,password:values.password})
+            if(users){ 
+                users.push({
+                    username:values.username,
+                    email:values.email,
+                    password:values.password,
+                })
+
+                let data = ({
+                    username:values.username,
+                    email:values.email,
+                    password:values.password,
+                })
+
+                axios.post(`${url}/users/sign-up`,data)
+                .then((data)=>{
+                    localStorage.setItem("token",data.data.token)
+                    toast.success("Your account has been created.",{
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    })
+                })
+                .catch((error)=>{
+                    console.log(error.response || `There was an error.`)
+                    toast.error(error.response?.data,{
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    })
+                })
                 localStorage.setItem("users",JSON.stringify(users))
             }else{
                 localStorage.setItem('users', JSON.stringify([{username:values.username,email:values.email,password:values.password}]));
             }
-        //    navigate("/sign-in", { replace: true });
+           navigate("/sign-in", { replace: true });
         }
     }
 

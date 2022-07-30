@@ -1,9 +1,10 @@
-import React,{useContext,useEffect,useState} from 'react'
+import React,{useContext,useState} from 'react'
 import "../App.css"
 import Loader from './loader/Loader'
 import UserContext from '../context/UserContext'
 import CartContext from '../context/CartContext'
 import { useNavigate } from "react-router-dom";
+import {toast} from 'react-toastify'
 
 const Cart = () =>{  
 let navigate = useNavigate();
@@ -18,11 +19,20 @@ const [items,setItems] = useState(JSON.parse(localStorage.getItem("cart")))
 const CompleteOrder = () =>{
     if(isLoggedIn){
         localStorage.setItem("order-history",JSON.stringify(history))
-        localStorage.removeItem('cart');
-        alert("Your order has been confirmed.")
+        const complete = localStorage.removeItem('cart');
+        // alert("Your order has been confirmed.")
+        if(complete){
+            toast.success("Your order has been confirmed.",{
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
+        }
+       
         setCount(JSON.parse(localStorage.getItem("cart")) && Object.keys(JSON.parse(localStorage.getItem("cart"))).length)
         navigate("/", { replace: true });
     }else{
+        toast.error("Login in order to complete the order.",{
+            position: toast.POSITION.BOTTOM_RIGHT
+        })
         navigate("/sign-in", { replace: true });
     }
 }
@@ -33,12 +43,13 @@ const removeCartItem = (id) =>{
     localStorage.setItem('cart', JSON.stringify(items));
     setItems(items)
     setCount(JSON.parse(localStorage.getItem("cart")) && Object.keys(JSON.parse(localStorage.getItem("cart"))).length)
+    if(items){
+        toast.success(`Product has been removed from cart.`,{
+            position: toast.POSITION.BOTTOM_RIGHT
+        })
+    }
+    
 }
-
-useEffect(()=>{
-    removeCartItem()
-    // eslint-disable-next-line
-},[])
 
 if(items){
 return (
