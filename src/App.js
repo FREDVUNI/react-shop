@@ -11,10 +11,14 @@ import Profile from './components/Profile'
 import Footer from './components/Footer'
 import PageNotFound from './components/PageNotFound'
 import Contact from './components/Contact'
+import {CartProvider} from './context/CartContext'
+import {UserProvider} from './context/UserContext'
 
 function App() {
   return (
     <div className="App">
+      <CartProvider>
+      <UserProvider>
       <Router>
           <NavBar/>
           <Routes>
@@ -30,6 +34,8 @@ function App() {
           </Routes>
           <Footer/>
       </Router>
+      </UserProvider>
+      </CartProvider>
     </div>
   );
 }

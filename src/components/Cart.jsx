@@ -5,7 +5,7 @@ import UserContext from '../context/UserContext'
 import CartContext from '../context/CartContext'
 import { useNavigate } from "react-router-dom";
 
-const Cart = () =>{
+const Cart = () =>{  
 let navigate = useNavigate();
 const { isLoggedIn }  = useContext(UserContext)
 const { setCount }  = useContext(CartContext)
@@ -63,7 +63,7 @@ return (
                         <img src={product.image} alt="cart"/>
                         <div  className="cart-item">
                             <p>{product.product}</p>
-                            <small>Price: ${product.price}</small>
+                            <small>Price:$ {product.price}</small>
                             <br/>
                             <span className="remove-Item" onClick={ ()=> removeCartItem(product.id) }>Remove</span>
                         </div>
@@ -73,7 +73,7 @@ return (
                   <p>{product.quantity}</p>
                </td>
                <td className="cart-total">
-                  <strong>$ {Number(product.price * product.quantity).toLocaleString()}</strong>
+                  <strong>$ {Number((product.price) * product.quantity).toLocaleString()}</strong>
                </td>
             </tr>
             </tbody>
@@ -81,9 +81,8 @@ return (
             }
          </table>
         <h2>Total: $ { items.reduce((a,v) =>  a = a + v.total , 0 )}</h2>
-
-         <button className="btn-primary btn-" onClick={CompleteOrder}>complete order now</button>
-         </>
+        <button className="btn-primary btn-" onClick={CompleteOrder}>complete order now</button>
+        </>
          }
       </div>
    </div>

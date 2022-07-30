@@ -1,6 +1,7 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import '../App.css'
 import ProductCard from './ProductCard'
+import CartContext from '../context/CartContext'
 import { useParams } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -13,9 +14,37 @@ const Product = () => {
     const [product,setProduct] = useState([])
     const [related,setRelated] = useState([])
     const [loading,setLoading] = useState(false)
-    
+    const [error,setError] = useState([])
+    const {addToCart} = useContext(CartContext) 
+    const [quantity,setQuantity] = useState(1)
     
     const single = localStorage.setItem("singleProduct",JSON.stringify(product))
+
+    const handleChange=(e)=>{
+       const input = e.target.value
+        setQuantity(input)
+    }
+
+    let cartItems = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : ""
+    let exists = cartItems && cartItems.some(c=> c.id === product.id)
+
+    const storeCart = () =>{
+        let cartItem = {
+            "id":product.id,
+            "product":product.product,
+            "image":product.image,
+            "quantity":quantity,
+            "price":(product.price).replace('$',''),
+            "total":(product.price).replace('$','')*quantity
+        }
+
+        if(exists){
+            setError("This product already exists in the cart.")
+        }else{
+            localStorage.setItem("cart",JSON.stringify([...cartItems,cartItem]))
+            addToCart(product.id,product.product,product.image,quantity,product.price)
+        }
+    }
 
     useEffect(()=>{
         const getProduct = async() =>{
@@ -84,6 +113,7 @@ const Product = () => {
                 {loading ? <Loading/>:
                 <>
                 <div className="product-col4">
+                    <div className="e-span">{error}</div>
                     <img src={product.image} alt={product.product}/>
                 </div>
                 <div className="col-single">
@@ -91,8 +121,8 @@ const Product = () => {
                     <h4>{product.price}</h4>
                     <h3 id="details">Description</h3>
                     <p>{product.description}</p>
-                    {/* <input type="number" value="4" min="1" id="cart-input"/> */}
-                    <button className="btn- cartBtn"><i className="fa fa-shopping-cart"></i> Add to cart</button>
+                    <input type="number" value={quantity} min="1" id="cart-input" onChange={handleChange}/>
+                    <button className="btn- cartBtn" onClick={ storeCart}><i className="fa fa-shopping-cart"></i> Add to cart</button>
                 </div>
                 </>
                 }
