@@ -1,22 +1,24 @@
-import React,{useState} from 'react'
-// import React,{useState,useContext,useEffect} from 'react'
-import {Link} from 'react-router-dom'
-// import {Link,useNavigate} from 'react-router-dom'
+import React,{useState,useContext,useEffect} from 'react'
+import {Link,useNavigate} from 'react-router-dom'
 import FormInput from './FormInput'
 import "../App.css"
-// import UserContext from '../context/UserContext'
+import UserContext from '../context/UserContext'
+import axios from 'axios'
+import {toast} from 'react-toastify'
+import {url} from '../api'
+// import jwtDecode from 'jwt-decode'
 
 const SignIn = () =>{
-    // const { isLoggedIn }  = useContext(UserContext)
+    const { isLoggedIn }  = useContext(UserContext)
     const [error,setError] = useState("");
 
-    // let navigate = useNavigate()
+    let navigate = useNavigate()
 
-    // useEffect(()=>{
-    //     if(isLoggedIn){
-    //         navigate("/", { replace: true });
-    //     }
-    // })
+    useEffect(()=>{
+        if(isLoggedIn){
+            navigate("/", { replace: true });
+        }
+    })
 
     const [values,setValues] = useState({
         email:"",
@@ -53,11 +55,29 @@ const SignIn = () =>{
         setError(false)
         e.preventDefault();  
         let users = JSON.parse(localStorage.getItem('users'))
-        let user = users && users.filter(user => user.email === values.email)
 
         if(users && users.some(user => user.email === values.email) && users.some(user => user.password === values.password)){
-            localStorage.setItem('LoggedIn', JSON.stringify({username:user.username,email:values.email,password:values.password})); 
-            window.location.reload(false);
+
+            let data = ({
+                email:values.email,
+                password:values.password,
+            })
+
+            axios.post(`${url}/users/sign-in`,data)
+                .then((data)=>{
+                    // console.log(data.data.token)
+                    localStorage.setItem("token",data.data.token)
+                    toast.success("You're logged in, welcome...",{
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    })
+                    navigate("/", { replace: true });
+                })
+                .catch((error)=>{
+                    console.log(error.response || `There was an error.`)
+                    toast.error(error.response?.data,{
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    })
+                })
         }else{
             setError("Invalid email and password combination.")
         }
