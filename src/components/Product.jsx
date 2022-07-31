@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import axios from 'axios'
 import {url} from '../api'
+import {toast} from 'react-toastify'
 
 const Product = () => {
     let {id} = useParams() 
@@ -40,9 +41,15 @@ const Product = () => {
 
         if(exists){
             setError("This product already exists in the cart.")
+            toast.error(cartItem.product + " already exists in the cart.",{
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
         }else{
             localStorage.setItem("cart",JSON.stringify([...cartItems,cartItem]))
             addToCart(product.id,product.product,product.image,quantity,product.price)
+            toast.success(cartItem.product +"  has been added to cart.",{
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
         }
     }
 
@@ -68,6 +75,7 @@ const Product = () => {
         }
 
         relatedProducts(window.scrollTo(0, 0));
+        setError('')
     },[id,single])
     const products = related && product && related.filter(p => p.category.id === product.categoryId)
     const Loading = () =>{
