@@ -49,7 +49,7 @@ const removeCartItem = (id) =>{
     
 }
 
-if(items){
+if(Object.keys(items).length > 0){
 return (
 <div className="container">
    <div className="content">
@@ -97,7 +97,7 @@ return (
    </div>
 </div>
 )
-}else if(!items){
+}else if(Object.keys(items).length === 0){
 return(
 <div className="container">
    <div className="content">

@@ -2,14 +2,16 @@ import React,{useState,useContext,useEffect} from 'react'
 import {Link,useNavigate} from 'react-router-dom'
 import FormInput from './FormInput'
 import "../App.css"
+import CartContext from '../context/CartContext'
 import UserContext from '../context/UserContext'
 import axios from 'axios'
-import {toast} from 'react-toastify'
+import {toast} from 'react-toastify' 
 import {url} from '../api'
 // import jwtDecode from 'jwt-decode'
 
 const SignIn = () =>{
     const { isLoggedIn }  = useContext(UserContext)
+    const { count }  = useContext(CartContext)
     const [error,setError] = useState("");
 
     let navigate = useNavigate()
@@ -70,7 +72,11 @@ const SignIn = () =>{
                     toast.success("You're logged in, welcome...",{
                         position: toast.POSITION.BOTTOM_RIGHT
                     })
-                    navigate("/", { replace: true });
+                    if(count){
+                        navigate("/cart", { replace: true });
+                    }else{
+                        navigate("/", { replace: true });
+                    }
                 })
                 .catch((error)=>{
                     console.log(error.response || `There was an error.`)

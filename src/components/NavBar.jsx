@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import '../App.css'
 import CartContext from '../context/CartContext'
 import UserContext from '../context/UserContext'
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
     const [isMobile,setIsMobile] = useState(false)
@@ -10,18 +11,20 @@ const NavBar = () => {
     const { isLoggedIn }  = useContext(UserContext)
 
     let [loggedIn,setLoggedIn] = useState(isLoggedIn)
+    let navigate = useNavigate()
 
     const Logout = (e) =>{
         e.preventDefault()
-        localStorage.removeItem('LoggedIn');
+        localStorage.removeItem('token');
         setLoggedIn(!isLoggedIn)
+        navigate("/", { replace: true });
         window.location.reload(false);
     }
 
     const users = JSON.parse(localStorage.getItem("users"))
 
-    let user = users ? users.filter(u => u.email === isLoggedIn.email) : null
-
+    let user = users ? users.filter(u => u.email === loggedIn.email) : null
+    
     return (
         <div className="container">  
         <div className="navbar">

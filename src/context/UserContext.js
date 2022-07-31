@@ -5,7 +5,7 @@ const UserContext = createContext()
 
 export function UserProvider({children}){
     
-    let isLoggedIn = jwtDecode(localStorage.getItem('token')) 
+    let isLoggedIn = localStorage.getItem('token') 
         ? jwtDecode(localStorage.getItem('token')) : ''
     
     return(
