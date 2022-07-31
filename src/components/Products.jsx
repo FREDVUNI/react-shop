@@ -16,9 +16,9 @@ const Products = () =>{
         let loadProducts = true;
 
         const getProducts = async() =>{
-            const res = await axios
-            .get(`${url}/products`)
             setLoading(true)
+            const res = await axios
+            .get(`${url}/products`) 
 
             if(loadProducts){
                 setProducts(await res.data);
@@ -38,6 +38,30 @@ const Products = () =>{
     const Loading = () =>{
         return(
         <>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
             <div className="col4 product"> 
                 <Skeleton height={350}/>
             </div>

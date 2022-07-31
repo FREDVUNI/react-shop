@@ -51,6 +51,30 @@ const Home = () => {
             <div className="col4 product"> 
                 <Skeleton height={350}/>
             </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
+            <div className="col4 product"> 
+                <Skeleton height={350}/>
+            </div>
         </>
         )
     }

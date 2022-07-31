@@ -77,7 +77,7 @@ const Product = () => {
                 <Skeleton height="400px"/>
             </div>
             <div className="col-single">
-                <Skeleton height="30px" width="170px"/>
+                <Skeleton height="30px"/>
                 <Skeleton height="30px" width="100px"/>
                 <Skeleton height="30px" width="150px"/>
                 <Skeleton height="200px"/>
