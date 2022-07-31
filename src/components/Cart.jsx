@@ -19,16 +19,14 @@ const [items,setItems] = useState(JSON.parse(localStorage.getItem("cart")))
 const CompleteOrder = () =>{
     if(isLoggedIn){
         localStorage.setItem("order-history",JSON.stringify(history))
-        const complete = localStorage.removeItem('cart');
+        localStorage.removeItem('cart');
         // alert("Your order has been confirmed.")
-        if(complete){
-            toast.success("Your order has been confirmed.",{
-                position: toast.POSITION.BOTTOM_RIGHT
-            })
-        }
        
         setCount(JSON.parse(localStorage.getItem("cart")) && Object.keys(JSON.parse(localStorage.getItem("cart"))).length)
         navigate("/", { replace: true });
+        toast.success("Your order has been confirmed.",{
+            position: toast.POSITION.BOTTOM_RIGHT
+        })
     }else{
         toast.error("Login in order to complete the order.",{
             position: toast.POSITION.BOTTOM_RIGHT
