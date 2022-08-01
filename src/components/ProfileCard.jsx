@@ -11,10 +11,6 @@ const ProfileCard = ({profile}) => {
                 <strong>Email:</strong>
                 {profile.email}
             </li>
-            <li>
-                <strong>Password:</strong>
-                {profile.password}
-            </li>
         </>
     )
 }

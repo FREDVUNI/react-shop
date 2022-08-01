@@ -25,7 +25,6 @@ const Profile = () =>{
                     </div>
                     <div className="sign-col">
                         <div className="form-box">
-                            <i className="fas fa-user icon-user"></i>
                             <h2 className="left-">Profile</h2>
                             <ul className="-span">
                                 {

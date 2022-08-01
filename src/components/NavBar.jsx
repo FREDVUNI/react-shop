@@ -1,14 +1,17 @@
-import React,{useContext,useState} from 'react'
+import React,{useContext,useState,useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import '../App.css'
 import CartContext from '../context/CartContext'
 import UserContext from '../context/UserContext'
 import { useNavigate } from "react-router-dom";
+import {url,setHeaders} from '../api'
+import axios from 'axios'
+import {toast} from 'react-toastify' 
 
 const NavBar = () => {
     const [isMobile,setIsMobile] = useState(false)
     const { count }  = useContext(CartContext)
-    const { isLoggedIn }  = useContext(UserContext)
+    const { isLoggedIn,auth,setAuth }  = useContext(UserContext)
 
     let [loggedIn,setLoggedIn] = useState(isLoggedIn)
     let navigate = useNavigate()
@@ -16,14 +19,30 @@ const NavBar = () => {
     const Logout = (e) =>{
         e.preventDefault()
         localStorage.removeItem('token');
-        setLoggedIn(!isLoggedIn)
+        setLoggedIn(!isLoggedIn) 
         navigate("/", { replace: true });
         window.location.reload(false);
     }
 
-    const users = JSON.parse(localStorage.getItem("users"))
+    useEffect(()=>{
+        const users = () =>{
+            axios
+            .get(`${url}/users`,setHeaders())
+            .then((data)=>{
+                setAuth(data.data)
+            })
+            .catch((error)=>{
+                console.log(error.response || `There was an error.`)
+                toast.error(error.response?.data,{
+                    position: toast.POSITION.BOTTOM_RIGHT
+                })
+            })
+        }
+        users()
+    },[setAuth])
 
-    let user = users ? users.filter(u => u.email === loggedIn.email) : null
+    let user = auth.filter(user => user.email === loggedIn.email)
+    if(!user) return navigate("/sign-in", { replace: true });
     
     return (
         <div className="container">  
@@ -42,7 +61,7 @@ const NavBar = () => {
                     <li className="dropdown">
                         <Link to=""><i className="fa fa-user"></i> 
                             { loggedIn ?
-                                user[0].username
+                                loggedIn.username
                                 :
                                 "Account"
                             }
