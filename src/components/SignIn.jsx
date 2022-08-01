@@ -13,11 +13,12 @@ const SignIn = () =>{
     const { isLoggedIn }  = useContext(UserContext)
     const { count }  = useContext(CartContext)
     const [error,setError] = useState("");
+    let [loggedIn,setLoggedIn] = useState(isLoggedIn)
 
     let navigate = useNavigate()
 
     useEffect(()=>{
-        if(isLoggedIn){
+        if(loggedIn){
             navigate("/", { replace: true });
         }
     })
@@ -69,13 +70,16 @@ const SignIn = () =>{
                 .then((data)=>{
                     // console.log(data.data.token)
                     localStorage.setItem("token",data.data.token)
+                    setLoggedIn(data.data.token)
                     toast.success("You're logged in, welcome...",{
                         position: toast.POSITION.BOTTOM_RIGHT
                     })
                     if(count){
                         navigate("/cart", { replace: true });
+                        window.location.reload(false);
                     }else{
                         navigate("/", { replace: true });
+                        window.location.reload(false);
                     }
                 })
                 .catch((error)=>{

@@ -38,7 +38,7 @@ const NavBar = () => {
                 })
             })
         }
-        users()
+        if(!setLoggedIn) users()
     },[setAuth])
 
     let user = auth.filter(user => user.email === loggedIn.email)
