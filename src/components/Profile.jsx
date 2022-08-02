@@ -10,11 +10,14 @@ const Profile = () =>{
     
     // console.log(user)
     let navigate = useNavigate()
+
     useEffect(()=>{
         if(!isLoggedIn){
             navigate("/", { replace: true });
         }
-    })
+
+    },[isLoggedIn,navigate])
+
     return (
         <>
         <div className="container">
@@ -29,6 +32,12 @@ const Profile = () =>{
                             <ul className="-span">
                                 {
                                     <ProfileCard key={user.email} profile={user}/>
+                                }
+                            </ul>
+                            <h2 className="left-">Order History</h2>
+                            <ul className="-span">
+                                {
+                                    
                                 }
                             </ul>
                         </div>

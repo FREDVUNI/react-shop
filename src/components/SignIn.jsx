@@ -7,13 +7,13 @@ import UserContext from '../context/UserContext'
 import axios from 'axios'
 import {toast} from 'react-toastify' 
 import {url} from '../api'
-// import jwtDecode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 
 const SignIn = () =>{
-    const { isLoggedIn }  = useContext(UserContext)
+    const { auth,setAuth }  = useContext(UserContext)
     const { count }  = useContext(CartContext)
     const [error,setError] = useState("");
-    let [loggedIn,setLoggedIn] = useState(isLoggedIn)
+    let [loggedIn,setLoggedIn] = useState(auth)
 
     let navigate = useNavigate()
 
@@ -70,16 +70,18 @@ const SignIn = () =>{
                 .then((data)=>{
                     // console.log(data.data.token)
                     localStorage.setItem("token",data.data.token)
-                    setLoggedIn(data.data.token)
+                    setAuth(jwtDecode(data.data.token))
                     toast.success("You're logged in, welcome...",{
                         position: toast.POSITION.BOTTOM_RIGHT
                     })
                     if(count){
                         navigate("/cart", { replace: true });
-                        window.location.reload(false);
+                        setLoggedIn(data.data.token)
+                        // window.location.reload(false);
                     }else{
                         navigate("/", { replace: true });
-                        window.location.reload(false);
+                        setLoggedIn(data.data.token)
+                        // window.location.reload(false);
                     }
                 })
                 .catch((error)=>{

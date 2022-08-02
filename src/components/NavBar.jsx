@@ -11,17 +11,17 @@ import {toast} from 'react-toastify'
 const NavBar = () => {
     const [isMobile,setIsMobile] = useState(false)
     const { count }  = useContext(CartContext)
-    const { isLoggedIn,auth,setAuth }  = useContext(UserContext)
+    const {auth,setAuth }  = useContext(UserContext)
+    const [clients,getClients] = useState([])
 
-    let [loggedIn,setLoggedIn] = useState(isLoggedIn)
     let navigate = useNavigate()
 
     const Logout = (e) =>{
         e.preventDefault()
         localStorage.removeItem('token');
-        setLoggedIn(!isLoggedIn) 
+        setAuth(!auth) 
         navigate("/", { replace: true });
-        window.location.reload(false);
+        // window.location.reload(false);
     }
 
     useEffect(()=>{
@@ -29,7 +29,10 @@ const NavBar = () => {
             axios
             .get(`${url}/users`,setHeaders())
             .then((data)=>{
-                setAuth(data.data)
+                getClients(data.data)
+                localStorage.setItem("users",JSON.stringify(clients))
+                if(!auth) return navigate("/sign-in", { replace: true });
+
             })
             .catch((error)=>{
                 console.log(error.response || `There was an error.`)
@@ -38,11 +41,9 @@ const NavBar = () => {
                 })
             })
         }
-        if(!setLoggedIn) users()
-    },[setAuth])
+        if(auth) users()
+    },[auth,setAuth,navigate,clients])
 
-    let user = auth.filter(user => user.email === loggedIn.email)
-    if(!user) return navigate("/sign-in", { replace: true });
     
     return (
         <div className="container">  
@@ -60,8 +61,8 @@ const NavBar = () => {
                     <li><Link to="/contact">Contact</Link></li>
                     <li className="dropdown">
                         <Link to=""><i className="fa fa-user"></i> 
-                            { loggedIn ?
-                                loggedIn.username
+                            { auth ?
+                                auth.username
                                 :
                                 "Account"
                             }
@@ -69,7 +70,7 @@ const NavBar = () => {
                         </Link>
                         <ul className="dropdown-content">
                             {
-                            loggedIn ?
+                            auth ?
                             <>
                                 <Link to="/profile">Profile</Link>
                                 <Link to="" onClick={Logout}>Sign out</Link>

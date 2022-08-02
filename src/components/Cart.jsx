@@ -1,6 +1,5 @@
 import React,{useContext,useState} from 'react'
 import "../App.css"
-import Loader from './loader/Loader'
 import UserContext from '../context/UserContext'
 import CartContext from '../context/CartContext'
 import { useNavigate } from "react-router-dom";
@@ -49,7 +48,7 @@ const removeCartItem = (id) =>{
     
 }
 
-if(Object.keys(items).length > 0){
+if(items && Object.keys(items).length > 0 && Object.keys(items).length !== null){
 return (
 <div className="container">
    <div className="content">
@@ -97,7 +96,7 @@ return (
    </div>
 </div>
 )
-}else if(Object.keys(items).length === 0){
+}else{
 return(
 <div className="container">
    <div className="content">
@@ -112,19 +111,6 @@ return(
    </div>
 </div>
 )
-}else{
-    <div className="container">
-        <div className="content">
-            <div className="row row2">
-                <div className="product-col4">
-                    <Loader/>
-                </div>
-                <div className="col-single">
-                    <h2 id="details">Products are loading ...</h2>
-                </div>
-            </div> 
-        </div>
-    </div>
 }
 }
 export default Cart
