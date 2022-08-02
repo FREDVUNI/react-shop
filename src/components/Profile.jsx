@@ -34,12 +34,13 @@ const Profile = () =>{
                                     <ProfileCard key={user.email} profile={user}/>
                                 }
                             </ul>
-                            <h2 className="left-">Order History</h2>
-                            <ul className="-span">
-                                {
-                                    
-                                }
-                            </ul>
+                            <h2>
+                                <img 
+                                    src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+                                    alt="profile"
+                                    style={{width:300,height:300,marginTop:30}}
+                                    />
+                            </h2>
                         </div>
                     </div>
                 </div>
