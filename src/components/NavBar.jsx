@@ -28,7 +28,7 @@ const NavBar = () => {
         const users = () =>{
             axios
             .get(`${url}/users`,setHeaders())
-            .then((data)=>{
+            .then((data)=>{ 
                 getClients(data.data)
                 localStorage.setItem("users",JSON.stringify(clients))
                 if(!auth) return navigate("/sign-in", { replace: true });

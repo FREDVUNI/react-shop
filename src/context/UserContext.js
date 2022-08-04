@@ -9,9 +9,10 @@ export function UserProvider({children}){
         ? jwtDecode(localStorage.getItem('token')) : ''
 
     let [auth,setAuth] = useState(isLoggedIn)
-    
+    const [clients,getClients] = useState([])
+
     return(
-        <UserContext.Provider value={{isLoggedIn,auth,setAuth}}>
+        <UserContext.Provider value={{isLoggedIn,auth,setAuth,clients,getClients}}>
             {children}
         </UserContext.Provider>
     )
