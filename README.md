@@ -1,3 +1,10 @@
+# react-shop
+
+A full stack react node JS online store, this is the frontend written in React JS
+
+# Backend
+https://github.com/FREDVUNI/node-shop
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
