@@ -1,6 +1,5 @@
 # react-shop
-
-A full stack react node JS online store, this is the frontend written in React JS
+A Full stack online shop/e-commerce client side that performs CRUD (create, read, update, delete) operations on Cloudinary using Nodejs, Express, Multer, PostgreSQl and React JS
 
 # Backend
 https://github.com/FREDVUNI/node-shop
