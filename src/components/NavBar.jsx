@@ -23,7 +23,7 @@ const NavBar = () => {
         navigate("/", { replace: true });
         // window.location.reload(false);
     }
-
+    
     useEffect(()=>{
         const users = () =>{
             axios
