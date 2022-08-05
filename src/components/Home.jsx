@@ -91,6 +91,7 @@ const Home = () => {
                             <span id="all" onClick={()=>filterProducts('Jewellery')}>Jewellery</span>
                             <span id="all" onClick={()=>filterProducts('Men\'s Clothing')}>Men's clothes</span>
                             <span id="all" onClick={()=>filterProducts('Women\'s Clothing')}>Women's clothes</span>
+                            <span id="all" onClick={()=>filterProducts('Kid\'s Clothing')}>Kid's clothes</span>
                             <span id="all" onClick={()=>filterProducts('Electronics')}>Electronics</span>
                         </div>
                     </div>
