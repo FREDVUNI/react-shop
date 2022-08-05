@@ -23,7 +23,7 @@ const NavBar = () => {
         navigate("/", { replace: true });
         // window.location.reload(false);
     }
-    
+
     useEffect(()=>{
         const users = () =>{
             axios
@@ -73,6 +73,8 @@ const NavBar = () => {
                             auth ?
                             <>
                                 <Link to="/profile">Profile</Link>
+                                <Link to="/admin/categories">Categories</Link>
+                                <Link to="/admin/products">Products</Link>
                                 <Link to="" onClick={Logout}>Sign out</Link>
                             </>
                                 :

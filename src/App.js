@@ -8,6 +8,12 @@ import SignUp from './components/SignUp'
 import Products from './components/Products'
 import Product from './components/Product'
 import Profile from './components/Profile'
+import GetCategories from './components/admin/category/Categories'
+import EditCategory from './components/admin/category/Category'
+import AddCategory from './components/admin/category/Add'
+import GetProducts from './components/admin/product/Products'
+import EditProduct from './components/admin/product/Product'
+import AddProduct from './components/admin/product/Add'
 import Footer from './components/Footer'
 import PageNotFound from './components/PageNotFound'
 import Contact from './components/Contact'
@@ -33,6 +39,12 @@ function App() {
               <Route path="/sign-up" element={<SignUp/>}/>   
               <Route path="/profile" element={<Profile/>}/>  
               <Route path="/contact" element={<Contact/>}/>  
+              <Route path="/admin/categories" element={<GetCategories/>}/>  
+              <Route path="/admin/category" element={<AddCategory/>}/>  
+              <Route path="/admin/category/:id" element={<EditCategory/>}/>
+              <Route path="/admin/products" element={<GetProducts/>}/>  
+              <Route path="/admin/product" element={<AddProduct/>}/>  
+              <Route path="/admin/product/:id" element={<EditProduct/>}/>  
               <Route path="*" element={<PageNotFound/>}/>  
           </Routes>
           <Footer/>
