@@ -2,10 +2,11 @@ import React,{useState,useEffect,useContext} from 'react'
 import UserContext from '../../../context/UserContext'
 import { useNavigate,Link } from "react-router-dom";
 import {toast} from 'react-toastify'
+import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios'
 import {url} from '../../../api'
 
-const GetProducts = () => {
+const Getproducts = () => {
     let navigate = useNavigate();
     const [products,setProducts] = useState([])
     const {auth} = useContext(UserContext)
@@ -27,68 +28,50 @@ const GetProducts = () => {
         if(auth) getProducts()
     },[auth])
 
-    if(products.length > 0 && products.length !== null){
-    return (
-    <div className="container">
-    <div className="content">
-        <Link to="/admin/product">
-            <button className="btn-primary btn-">new product</button>
-        </Link>
+    const columns = [
+        {field: "id",headerName:"ID",width:80},
+        {field: "product",headerName:"Product",width:200},
+        {field: "price",headerName:"Price",width:100},
+        {field: "description",headerName:"Description",width:450},
+        {
+            field: "action",
+            headerName:"Action",
+            width:80,
+            renderCell:(params)=>{
+                return(
+                    <>
+                    <Link to={{pathname:"/product/"+ params.row.id,product:params.row}} style={{color:"#000",cursor:'pointer'}}>
+                        <i className="fas fa-pencil-alt"></i>
+                    </Link>
+                    <i className="fas fa-trash" style={{color:"#000",marginLeft:"10px"}}></i>
+                    </>
+                )
+            } 
+        },
+    ];
 
-        <div className="row products mtop">
-            {
-            <>
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                {products.map((product,index)=>(
-                <tbody key={index}>
-                <tr>
-                    <td>
-                        <div className="cart-content">
-                            <div  className="cart-item">
-                                <p>{product.product}</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <span>
-                            <Link to={`/admin/product/${product.id}`} style={{color:"#000"}}>
-                                <i className="fas fa-pencil-alt"></i>
-                            </Link>
-                            <i className="fas fa-trash" style={{color:"#000",marginLeft:"10px"}}></i>
-                        </span>
-                    </td>
-                </tr>
-                </tbody>
-                ))
-                }
-            </table>
-            </>
-            }
-        </div>
-    </div>
-    </div>
-    )
-    }else{
-    return(
-    <div className="container">
-    <div className="content">
-        <div className="row row2">
-            <div className="product-col4">
-                <img src={"../images/404.svg"} alt="product"/>
-            </div>
-            <div className="col-single">
-                <h3 id="details">There are currently no products available.</h3>
+    return (
+        <div className="container">
+        <div className="content">
+            <Link to="/admin/product">
+                <button className="btn-primary btn-">new product</button>
+            </Link>
+
+            <div className="row products mtop">
+                <div style={{ height: 550, width: '100%' }}>
+                    <DataGrid
+                        style={{fontFamily:'Poppins'}}
+                        rows={products}
+                        columns={columns}
+                        pageSize={8}
+                        disableSelectionOnClick
+                        checkboxSelection
+                        getRowId={(r)=>r.id}
+                    />
+                </div>
             </div>
         </div>
     </div>
-    </div>
     )
-    }
 }
-export default GetProducts
+export default Getproducts

@@ -49,8 +49,11 @@ const AddProduct = () =>{
 return (
 <div className="content">
    <div className="row row2">
-      <div className="-col">
-         <div className="form-boxs">
+    <div className="product-col4">
+        <img src={"../../images/log.svg"} alt="sign-in"/>
+    </div>
+      <div className="sign-col">
+         <div className="form-box">
             <div id="login-error"></div>
             <form id="signIn" onSubmit={handleSubmit} encType="multipart/form-data">
                <span className="e-span">{error}</span>
