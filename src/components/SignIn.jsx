@@ -86,7 +86,7 @@ const SignIn = () =>{
                 })
                 .catch((error)=>{
                     console.log(error.response || `There was an error.`)
-                    toast.error(error.response?.data,{
+                    toast.error(error.response?.data.error,{
                         position: toast.POSITION.BOTTOM_RIGHT
                     })
                 })

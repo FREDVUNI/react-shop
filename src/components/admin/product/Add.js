@@ -38,14 +38,12 @@ const [values,setValues] = useState({
 const handleSubmit = (e) =>{
     setError(false)
     e.preventDefault();  
-    let data = ({
-        product:values.product,
-        price:values.price,
-        description:values.description,
-        image:values.image,
-        categoryId:Number(values.categoryId),
-    })
-
+    let data = new FormData();
+    data.append('product', values.product);
+    data.append('price', values.price);
+    data.append('description', values.description);
+    data.append('image', values.image);
+    data.append('categoryId', Number(values.categoryId));
     console.log(data)
 
 axios.post(`${url}/products`,data,setHeaders())
@@ -80,14 +78,14 @@ return (
                     <option>choose category</option>
                     {
                         categories && categories.map((category)=>(
-                            <option key={category.id}  value={values.categoryId = category.id}>{category.category}</option>
+                            <option key={category.id}  value={category.id}>{category.category}</option>
                         ))
                     }
                </select>
                <label htmlFor="description">Description</label>
                <textarea cols="40" rows="10" name="description" placeholder="Enter product description" value={values.description}  onChange={(e)=>{setValues({...values,description:e.target.value})}} required></textarea>
                <label htmlFor="image">Image</label>
-               <input type="file" name="image" value={values.image}  onChange={(e)=>{setValues({...values,image:e.target.value})}} required/>
+               <input type="file" name="image" value={values.image}  onChange={(e)=>{setValues({...values,image:e.target.files[0]})}} required/>
                <button type="submit" className="btn">ADD PRODUCT</button>
             </form>
          </div>
