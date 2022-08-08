@@ -54,8 +54,10 @@ return (
     </div>
       <div className="sign-col">
          <div className="form-box">
-            <div id="login-error"></div>
             <form id="signIn" onSubmit={handleSubmit} encType="multipart/form-data">
+               <h3>Add a category.</h3>
+               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil deleniti itaque similique magni. Magni, laboriosam perferendis maxime!</p>
+               <br/>
                <span className="e-span">{error}</span>
                <label htmlFor="category">Category</label>
                <input type="text" name="category" placeholder="Enter category" value={values.category}  onChange={(e)=>{setValues({...values,category:e.target.value})}} required/>

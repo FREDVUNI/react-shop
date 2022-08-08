@@ -69,10 +69,15 @@ const AddProduct = () =>{
 return (
 <div className="content">
    <div className="row row2">
-      <div className="-col">
+    <div className="product-col4">
+        <img src={"../../images/log.svg"} alt="sign-in"/>
+    </div>
+      <div className="sign-col">
          <div className="form-boxs">
             <div id="login-error"></div>
             <form id="signIn" onSubmit={handleSubmit} encType="multipart/form-data">
+               <h3>Add a product.</h3>
+               <br/>
                <span className="e-span">{error}</span>
                <label htmlFor="product">Product</label>
                <input type="text" name="product" placeholder="Enter product" value={values.product}  onChange={(e)=>{setValues({...values,product:e.target.value})}} required/>

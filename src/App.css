@@ -121,7 +121,7 @@ nav ul li a:hover{
   display: none;
   position: absolute;
   background-color: rgba(255,255,255,0.95);
-  min-width: 100px;
+  min-width: 120px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
@@ -563,6 +563,13 @@ h4{
   text-decoration:none;
   cursor:pointer;
 }
+#add{
+  text-decoration: none;
+  color: #ff523b;
+  font-size: 1.2rem;
+  text-decoration:none;
+  cursor:pointer;
+}
 #reg-error,#login-error,#profileHis{
     color: #dc3545;
 }
@@ -798,11 +805,14 @@ th:last-child{
 .form-boxs {
     background: #fff;
     width: 500px;
-    height: 700px;
+    height: 750px;
     position: relative;
     padding: 30px;
     margin: auto;
     box-shadow: 0 0 5px 0px rgb(0 0 0 / 10%);
+}
+textarea::placeholder{
+    font-family: 'Poppins', sans-serif;
 }
 .form-box h2 {
     text-align:center;
@@ -811,7 +821,15 @@ th:last-child{
     max-width:400px;
     padding:0 20px;
     position:absolute;
-    top:130px;
+}
+
+.form-boxs h2 {
+    text-align:center;
+}
+.form-boxs form{
+    max-width:450px;
+    padding:0 20px;
+    position:absolute;
 }
 form input,select{
     width:100%;
@@ -978,7 +996,13 @@ form button{
     .form-box{
         width:450px;
     }
+    .form-boxs{
+        width:450px;
+    }
     .form-box form{
+        max-width:400px;
+    }
+    .form-boxs form{
         max-width:400px;
     }
     .title-banner{
@@ -1019,10 +1043,16 @@ form button{
     .form-box{
         width:290px;
     }
+    .form-boxs{
+        width:290px;
+    }
     .searchForm{
         display:block;
     }
     .form-box form{
+        max-width:300px;
+    }
+    .form-boxs form{
         max-width:300px;
     }
     .searchForm i{

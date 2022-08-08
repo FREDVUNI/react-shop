@@ -53,10 +53,9 @@ const Getproducts = () => {
     return (
         <div className="container">
         <div className="content">
-            <Link to="/admin/product">
-                <button className="btn-primary btn-">new product</button>
+            <Link to="/admin/product" id="add">
+                Add Product
             </Link>
-
             <div className="row products mtop">
                 <div style={{ height: 550, width: '100%' }}>
                     <DataGrid

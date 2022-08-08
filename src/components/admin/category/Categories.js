@@ -51,10 +51,9 @@ const GetCategories = () => {
     return (
         <div className="container">
         <div className="content">
-            <Link to="/admin/category">
-                <button className="btn-primary btn-">new category</button>
+            <Link to="/admin/category" id="add">
+                Add Category
             </Link>
-
             <div className="row products mtop">
                 <div style={{ height: 400, width: '100%' }}>
                     <DataGrid
