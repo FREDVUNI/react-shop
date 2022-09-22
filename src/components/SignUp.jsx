@@ -13,7 +13,7 @@ const SignUp = () =>{
     let navigate = useNavigate()
 
     if(isLoggedIn){
-        navigate("/sign-in", { replace: true });
+        navigate("/signin", { replace: true });
     }
 
     const [error,setError] = useState("");

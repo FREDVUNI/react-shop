@@ -66,7 +66,7 @@ const SignIn = () =>{
                 password:values.password,
             })
 
-            axios.post(`${url}/users/sign-in`,data)
+            axios.post(`${url}/users/login`,data)
                 .then((data)=>{
                     // console.log(data.data.token)
                     localStorage.setItem("token",data.data.token)
