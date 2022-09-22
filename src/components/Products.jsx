@@ -8,7 +8,6 @@ import ProductCard from './ProductCard'
 const Products = () =>{
     const [products,setProducts] = useState([])
     const [loading,setLoading] = useState(false)
-    // const [count,setCount] = useState(0)
 
     let storeProducts = localStorage.setItem("all-products",JSON.stringify(products))
 

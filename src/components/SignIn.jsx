@@ -68,7 +68,6 @@ const SignIn = () =>{
 
             axios.post(`${url}/users/login`,data)
                 .then((data)=>{
-                    // console.log(data.data.token)
                     localStorage.setItem("token",data.data.token)
                     setAuth(jwtDecode(data.data.token))
                     toast.success("You're logged in, welcome...",{
@@ -77,11 +76,9 @@ const SignIn = () =>{
                     if(count){
                         navigate("/cart", { replace: true });
                         setLoggedIn(data.data.token)
-                        // window.location.reload(false);
                     }else{
                         navigate("/", { replace: true });
                         setLoggedIn(data.data.token)
-                        // window.location.reload(false);
                     }
                 })
                 .catch((error)=>{
@@ -95,7 +92,6 @@ const SignIn = () =>{
         }
 
     }
-    // console.log(values)
     return (
         <div className="content">
         <div className="row row2">   

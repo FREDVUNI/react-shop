@@ -8,7 +8,6 @@ const Profile = () =>{
     const { isLoggedIn }  = useContext(UserContext)
     let user = isLoggedIn ? isLoggedIn : ''
     
-    // console.log(user)
     let navigate = useNavigate()
 
     useEffect(()=>{

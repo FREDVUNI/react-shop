@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-// import Ratings from './Ratings'
 
 const ProductCard = ({product}) =>{
     return(
@@ -16,7 +15,6 @@ const ProductCard = ({product}) =>{
             <p style={{"color":"#000"}}>
                 <strong>{product.price}</strong>
             </p>
-                {/* <Ratings value={product.rating.rate} text={`${product.rating.count} reviews`}/> */}
                 <span style={{"color":"red"}}>{product.category.category}</span>
         </div>
     )

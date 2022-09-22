@@ -44,7 +44,6 @@ const AddProduct = () =>{
         data.append('product', values.product);
         data.append('price', values.price);
         data.append('description', values.description);
-        // data.append('image', values.image);
         data.append('categoryId', Number(values.categoryId));
 
          if(document.getElementById('img').files[0]){

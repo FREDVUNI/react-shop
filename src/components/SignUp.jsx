@@ -6,7 +6,6 @@ import UserContext from '../context/UserContext'
 import axios from 'axios'
 import {toast} from 'react-toastify'
 import {url} from '../api'
-// import jwtDecode from 'jwt-decode'
 
 const SignUp = () =>{
     const { isLoggedIn }  = useContext(UserContext)
@@ -92,7 +91,7 @@ const SignUp = () =>{
                     password:values.password,
                 })
 
-                axios.post(`${url}/users/sign-up`,data)
+                axios.post(`${url}/users/signup`,data)
                 .then((data)=>{
                     localStorage.setItem("token",data.data.token)
                     toast.success("Your account has been created.",{

@@ -19,7 +19,6 @@ const CompleteOrder = () =>{
     if(isLoggedIn){
         localStorage.setItem("order-history",JSON.stringify(history))
         localStorage.removeItem('cart');
-        // alert("Your order has been confirmed.")
        
         setCount(JSON.parse(localStorage.getItem("cart")) && Object.keys(JSON.parse(localStorage.getItem("cart"))).length)
         navigate("/", { replace: true });

@@ -21,7 +21,6 @@ const NavBar = () => {
         localStorage.removeItem('token');
         setAuth(!auth) 
         navigate("/", { replace: true });
-        // window.location.reload(false);
     }
 
     useEffect(()=>{
