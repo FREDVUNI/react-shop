@@ -1,4 +1,4 @@
-export const url = 'https://shop-rest-apis.herokuapp.com/api/v1'
+export const url = 'https://shop-rest-api.onrender.com/api/v1'
 
 export const setHeaders = () =>{
     const header = {
